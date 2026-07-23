@@ -1,8 +1,8 @@
  "next";
  "@vercel/analytics/next";
-import "./globals.css";
+"./globals.css";
 
-export const metadata: Metadata = {
+ = {
   title: "Nexus Ultra Builder",
   description: "Enterprise AI platform for responsive website creation, workflow automation, content generation, deployment, and team collaboration.",
 };
