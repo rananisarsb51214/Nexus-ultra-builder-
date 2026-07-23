@@ -16,7 +16,7 @@
     <html lang="en">
       <body className="antialiased">
         {children}
-        <Analytics />
+         
       </body>
     </html>
   );
