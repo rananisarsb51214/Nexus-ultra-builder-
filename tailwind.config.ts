@@ -1,4 +1,4 @@
- from "tailwindcss";  Config = {
+ from "tailwindcss"; {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
