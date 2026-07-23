@@ -1,5 +1,5 @@
  "next";
- "@vercel/analytics/next";
+ "@vercel//next";
 "./globals.css";
 
  = {
