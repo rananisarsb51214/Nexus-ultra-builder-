@@ -1,0 +1,21 @@
+{
+  "name": "nexus-ultra",
+  "version": "1.0.0",
+  "description": "NEXUS ULTRA - Full Stack Application Generator",
+  "main": "index.js",
+  "scripts": {
+    "start": "node generator.js",
+    "setup": "setup.bat",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "cd output/module3-backend && npm run dev",
+    "frontend": "cd output/module2-web && npm start"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "fs-extra": "^11.1.1",
+    "inquirer": "^8.2.5"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
