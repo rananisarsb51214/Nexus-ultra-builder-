@@ -1,588 +1,96 @@
-# Nexus Ultra Builder 🚀
+# Nisaraistudio- ✨
 
-Nexus Ultra Builder is an enterprise AI platform designed for responsive website creation, workflow automation, content generation, deployment, and team collaboration.
+Nisaraistudio- is a modern, responsive React-based portfolio website showcasing dynamic UI elements and interactive components. It's built with Vite for fast development, styled with Tailwind CSS, and enhanced with captivating animations powered by Framer Motion. While the repository's broader vision encompasses an AI Website Builder and Development Agent (referred to as "Nisar AI Studio"), the current codebase focuses on a highly functional and interactive frontend portfolio, complete with animated project detail modals and a contact form.
 
-[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Stars](https://img.shields.io/github/stars/rananisarsb51214-web/Nexus-ultra-builder.svg?style=flat-square)](https://github.com/rananisarsb51214-web/Nexus-ultra-builder/stargazers)
-[![Forks](https://img.shields.io/github/forks/rananisarsb51214-web/Nexus-ultra-builder.svg?style=flat-square)](https://github.com/rananisarsb51214-web/Nexus-ultra-builder/forks)
+## Table of Contents 📑
 
-## ✨ Table of Contents
+- [Features ✨](#features-%e2%9c%a8)
+- [Tech Stack 🛠️](#tech-stack-%f0%9f%9a%a7%ef%b8%8f)
+- [Installation ⬇️](#installation-%e2%ac%87%ef%b8%8f)
+- [Usage 💡](#usage-%f0%9f%92%a1)
+- [Project Structure 📂](#project-structure-%f0%9f%93%81)
+- [API Reference 🔗](#api-reference-%f0%9f%94%8c)
+- [Contributing 🤝](#contributing-%f0%9f%a4%9d)
+- [License 📄](#license-%f0%9f%93%84)
+- [Important links 🌐](#important-links-%f0%9f%8c%90)
+- [Footer 🦶](#footer-%f0%9f%9a%b6%f0%9f%8f%bd)
 
-- [About the Project](#-about-the-project)
-- [Key Features](#-key-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Usage](#-usage)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Contact](#-contact)
+## Features ✨
 
-## 🚀 About the Project
+This portfolio website offers a rich user experience through its core features:
 
-Nexus Ultra Builder is an enterprise-grade AI platform that streamlines the entire website development lifecycle. It empowers teams to build responsive websites efficiently, automate complex workflows, generate high-quality content, and deploy seamlessly, all within a collaborative environment.
+- **Interactive Portfolio Display:** 🖼️ Showcases a curated list of portfolio items, each with a title and a concise description.
+- **Animated Project Modals:** 🌟 Clicking on any portfolio item smoothly opens an animated modal (powered by Framer Motion) that displays detailed information, including a full description, technologies used, and a project link.
+- **Animated Contact Form Modal:** 📧 A dedicated contact button triggers an animated modal containing a form for users to submit their inquiries, ensuring a polished interaction.
+- **Dynamic UI Elements:** 🎨 Leverages `lucide-react` for crisp, modern icons and `motion` from Framer Motion for engaging, fluid animations throughout the interface.
+- **Responsive Design:** 📱 Built with Tailwind CSS, guaranteeing that the application looks and functions beautifully across all devices, from desktops to mobile phones.
+- **Vercel Analytics Integration:** 📈 Includes `@vercel/analytics` for unobtrusive tracking of user engagement and website performance, providing valuable insights.
 
-## ✨ Key Features
+## Tech Stack 🛠️
 
-- **AI-Powered Website Creation:** Leverage artificial intelligence to design and build responsive websites with ease.
-- **Workflow Automation:** Automate repetitive tasks and streamline development processes.
-- **Content Generation:** Utilize AI to generate engaging and relevant content for your websites.
-- **Seamless Deployment:** Deploy your projects efficiently with integrated deployment tools.
-- **Team Collaboration:** Foster collaboration among team members with a centralized platform.
+The project is built using a modern and robust technology stack:
 
-## 🛠️ Tech Stack
+**Languages:**
+- TypeScript
+- HTML
+- CSS
 
-- **Frontend:** React, Next.js, Tailwind CSS
-- **Backend:** Node.js, Express
-- **Language:** TypeScript
+**Frameworks & Libraries:**
+- **React ⚛️:** The core UI library for building dynamic user interfaces.
+- **Vite ⚡:** A next-generation frontend tooling that provides an extremely fast development experience.
+- **Tailwind CSS 🌬️:** A utility-first CSS framework for rapidly building custom designs.
+- **Framer Motion 🎬:** A powerful animation library for React to create smooth and interactive UI animations.
+- **Lucide React 💡:** A collection of beautiful and customizable open-source icons.
+- **Vercel Analytics 📊:** For gathering performance metrics and visitor insights.
 
-## 📂 Project Structure
+**Development Dependencies & Tools:**
+- `autoprefixer`, `tsx`, `typescript`
 
-Due to the limited number of files analyzed, a detailed project structure cannot be definitively determined. However, based on common Next.js and Express.js project layouts, it might resemble:
+**Potential Integrations (for broader vision, not actively used in current frontend):**
+- **@google/genai:** For potential AI content generation, as indicated by `package.json` dependency.
+- **express:** A fast, unopinionated, minimalist web framework for Node.js, suggesting a future backend component.
 
-```
-nexus-ultra-builder/
-├── public/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── styles/
-│   └── ...
-├── api/
-│   └── ...
-├── .env.example
-├── package.json
-└── README.md
-```
+## Installation ⬇️
 
-## 🏁 Getting Started
+To get this project up and running on your local machine, follow these steps:
 
-This section outlines the general steps to get the project running. Specific prerequisites and commands would ideally be derived from `package.json` and other configuration files.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/rananisarsb51214/Nisaraistudio-
+    cd Nisaraistudio-
+    ```
 
-### Prerequisites
+2.  **Install dependencies:**
+    Ensure you have Node.js (which includes npm) installed. Then, install the project dependencies:
+    ```bash
+    npm install
+    ```
 
-- Node.js (v18.0.0 or higher recommended)
-- npm or yarn
+3.  **Set up environment variables (Optional):**
+    The project is configured to potentially use `dotenv`. If you plan to integrate with Google AI (as suggested by `vite.config.ts`), create a `.env` file in the root directory and add your API key:
+    ```
+    GEMINI_GEMINI_API_KEY=your_gemini_api_key
+    ```
+    *(Note: The current frontend application does not directly use this key, but it's part of the broader project's configuration.)*
 
-### Installation
+## Usage 💡
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/rananisarsb51214-web/Nexus-ultra-builder.git
-   cd Nexus-ultra-builder
-   ```
+This project serves as a demonstration of a modern React frontend with advanced UI/UX features. It's an excellent starting point for building interactive portfolios or similar single-page applications.
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+### Running the Development Server
 
-3. **Set up environment variables (if applicable):**
-   Look for a `.env.example` file and create a `.env` file by copying it. Populate the `.env` file with your specific configurations.
-   ```bash
-   cp .env.example .env
-   # Edit .env with your values
-   ```
+To start the development server and view the portfolio website:
 
-## 💡 Usage
+1.  Ensure you have completed the [Installation](#installation-%e2%ac%87%ef%b8%8f) steps.
+2.  Run the development script:
+    ```bash
+    npm run dev
+    ```
+    The application will typically be accessible at `http://localhost:3000` (as configured in `package.json`).
 
-To start the development server:
+### Interacting with the Portfolio
 
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-For production builds:
-
-```bash
-npm run build
-# or
-yarn build
-```
-
-**Note:** Actual usage examples would depend on the specific functionalities implemented in the codebase, which were not fully analyzed.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/YourFeature`)
-3. Commit your Changes (`git commit -m 'Add some YourFeature'`)
-4. Push to the Branch (`git push origin feature/YourFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📫 Contact
-
-Rana Nisar Ali Shah - [@rananisarsb51214](https://github.com/rananisarsb51214) - rananisarsb51214@gmail.com
-
-Project Link: [https://github.com/rananisarsb51214-web/Nexus-ultra-builder](https://github.com/rananisarsb51214-web/Nexus-ultra-builder)
-
+-   **Explore Portfolio:** Upon loading, you'll see portfolio items. Click on an 
 
 ---
-**<p align="center">Generated by [ReadmeCodeGen](https://www.readmecodegen.com/)</p>**# Nexus Ultra Builder - Enterprise AI Website Builder
-
-<div align="center">
-
-[![Build Status](https://github.com/nexus-ultra/builder/actions/workflows/deploy.yml/badge.svg)](https://github.com/nexus-ultra/builder)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19-61dafb.svg)](https://react.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
-**The Ultimate AI-Powered Website Builder for Creators & Enterprises**
-
-[Features](#features) • [Quick Start](#quick-start) • [Documentation](#documentation) • [Deployment](#deployment) • [Contributing](#contributing)
-
-</div>
-
----
-
-## 🚀 Overview
-
-Nexus Ultra Builder is a modern, enterprise-grade website builder that combines the power of AI, drag-and-drop design, and seamless automation. Build stunning, responsive websites without any coding knowledge.
-
-### Key Highlights
-
-- ✨ **AI-Powered Design** - Intelligent suggestions and content generation
-- 🎨 **Drag & Drop Builder** - Intuitive visual interface
-- ⚡ **Lightning Fast** - Optimized performance and instant deployments
-- 🔒 **Secure & Scalable** - Enterprise-grade security and infrastructure
-- 📊 **Real-Time Analytics** - Track performance with detailed insights
-- 👥 **Team Collaboration** - Work together with unlimited team members
-- 💳 **Easy Monetization** - Built-in subscription billing with Stripe
-
----
-
-## 📋 Table of Contents
-
-1. [Features](#features)
-2. [Quick Start](#quick-start)
-3. [Documentation](#documentation)
-4. [Architecture](#architecture)
-5. [Development](#development)
-6. [Deployment](#deployment)
-7. [API Reference](#api-reference)
-8. [Security](#security)
-9. [Contributing](#contributing)
-10. [Support](#support)
-
----
-
-## ✨ Features
-
-### Website Building
-- **Visual Builder** - Drag-and-drop interface with real-time preview
-- **100+ Templates** - Professional, pre-built templates for every industry
-- **Responsive Design** - Automatically optimized for all devices
-- **Component Library** - Reusable components for consistent design
-
-### AI Features
-- **AI Content Generation** - Generate compelling copy automatically
-- **Smart Layouts** - AI suggests optimal layouts based on content
-- **Image Enhancement** - Intelligent image optimization and suggestions
-- **SEO Optimization** - Automatic meta tags and SEO best practices
-
-### Publishing & Deployment
-- **One-Click Deploy** - Deploy instantly to global CDN
-- **Custom Domains** - Use your own domain or nexusultra.com subdomain
-- **SSL/TLS Security** - Automatic HTTPS for all sites
-- **Global CDN** - Lightning-fast delivery worldwide
-
-### Analytics & Insights
-- **Real-Time Analytics** - Track visitors and conversions in real-time
-- **Detailed Reports** - Comprehensive performance metrics
-- **Custom Events** - Track custom user interactions
-- **Conversion Tracking** - Monitor sales and leads
-
-### Collaboration
-- **Team Workspaces** - Organize projects with workspaces
-- **Role-Based Access** - Control who can do what
-- **Comments & Feedback** - Collaborate directly on designs
-- **Version History** - Track and restore previous versions
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18.0 or higher
-- npm 9.0 or higher
-- Git
-- PostgreSQL or Supabase account
-
-### Installation
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/nexus-ultra/builder.git
-cd nexus-ultra-builder-prod
-```
-
-2. **Install dependencies**
-```bash
-npm install
-```
-
-3. **Setup environment variables**
-```bash
-cp .env.example .env.local
-```
-
-Edit `.env.local` and add your configuration:
-```env
-# Database
-DATABASE_URL=postgresql://user:password@localhost:5432/nexus_ultra
-
-# Authentication
-NEXTAUTH_SECRET=your-random-secret-key
-NEXTAUTH_URL=http://localhost:3000
-
-# AI Services
-ANTHROPIC_API_KEY=sk-ant-...
-OPENAI_API_KEY=sk-...
-
-# Stripe
-STRIPE_PUBLIC_KEY=pk_live_...
-STRIPE_SECRET_KEY=sk_live_...
-STRIPE_WEBHOOK_SECRET=whsec_...
-
-# OAuth (Optional)
-GOOGLE_CLIENT_ID=...
-GOOGLE_CLIENT_SECRET=...
-```
-
-4. **Setup database**
-```bash
-npx prisma generate
-npx prisma migrate dev --name init
-```
-
-5. **Run development server**
-```bash
-npm run dev
-```
-
-6. **Open browser**
-```
-http://localhost:3000
-```
-
----
-
-## 📚 Documentation
-
-### Guides
-
-- **[Architecture Guide](./docs/architecture.md)** - System design and components
-- **[Database Schema](./docs/database.md)** - Data model and relationships
-- **[API Documentation](./docs/api.md)** - Complete API reference
-- **[Authentication](./docs/auth.md)** - Auth flows and security
-- **[Deployment Guide](./docs/deployment.md)** - Production deployment
-
-### Features
-
-- **[Website Builder](./docs/features/builder.md)** - How to build websites
-- **[AI Features](./docs/features/ai.md)** - AI-powered capabilities
-- **[Templates](./docs/features/templates.md)** - Using templates
-- **[Analytics](./docs/features/analytics.md)** - Tracking and insights
-- **[Billing](./docs/features/billing.md)** - Subscription management
-
----
-
-## 🏗️ Architecture
-
-### Tech Stack
-
-**Frontend**
-- Next.js 15 + React 19
-- TypeScript 5.3
-- Tailwind CSS 3
-- Framer Motion
-- React Query
-
-**Backend**
-- Next.js API Routes
-- Node.js
-- Prisma ORM
-- PostgreSQL
-
-**Infrastructure**
-- Vercel (Frontend)
-- Cloudflare (CDN)
-- Firebase Storage (Images)
-- Stripe (Payments)
-
-**AI Services**
-- Claude (Primary)
-- OpenAI (Fallback)
-- Google Gemini (Optional)
-
-### System Diagram
-
-```
-┌─────────────────────────────────────────────────────┐
-│                  Client Layer                       │
-│  (Next.js + React 19 + TypeScript)                 │
-└────────────────────┬────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────┐
-│            API Layer (Next.js Routes)               │
-│  - Authentication                                   │
-│  - Website CRUD                                     │
-│  - AI Generation                                    │
-│  - Analytics                                        │
-└────────────────────┬────────────────────────────────┘
-                     │
-        ┌────────────┴───────────┬──────────┐
-        │                        │          │
-┌───────▼────────┐  ┌──────────▼────┐  ┌──▼─────────────┐
-│  PostgreSQL    │  │  AI Services  │  │ Stripe API    │
-│  (via Prisma)  │  │  (Claude/GPT) │  │ (Payments)    │
-└────────────────┘  └───────────────┘  └───────────────┘
-```
-
----
-
-## 💻 Development
-
-### Project Structure
-
-```
-nexus-ultra-builder/
-├── app/                      # Next.js app directory
-│   ├── api/                  # API routes
-│   ├── layout.tsx            # Root layout
-│   ├── page.tsx              # Home page
-│   └── globals.css           # Global styles
-├── components/               # React components
-│   └── providers.tsx         # App providers
-├── lib/                      # Utility libraries
-│   ├── auth.ts               # Authentication
-│   ├── db.ts                 # Database utilities
-│   ├── ai.ts                 # AI integration
-│   ├── crypto.ts             # Encryption/hashing
-│   └── utils.ts              # Helper functions
-├── types/                    # TypeScript types
-├── prisma/                   # Prisma schema
-│   └── schema.prisma         # Database schema
-├── public/                   # Static assets
-└── docs/                     # Documentation
-```
-
-### Available Scripts
-
-```bash
-# Development
-npm run dev          # Start dev server
-npm run build        # Build for production
-npm start           # Start production server
-
-# Database
-npm run db:push     # Push schema to database
-npm run db:migrate  # Run migrations
-npm run studio      # Open Prisma Studio
-
-# Code Quality
-npm run lint        # Run ESLint
-npm run type-check  # TypeScript check
-npm run format      # Format with Prettier
-```
-
-### Environment Variables
-
-See `.env.example` for complete list. Essential variables:
-
-```env
-# Database
-DATABASE_URL=
-
-# Auth
-NEXTAUTH_SECRET=
-NEXTAUTH_URL=
-
-# AI
-ANTHROPIC_API_KEY=
-OPENAI_API_KEY=
-
-# Stripe
-STRIPE_PUBLIC_KEY=
-STRIPE_SECRET_KEY=
-STRIPE_WEBHOOK_SECRET=
-```
-
----
-
-## 🚀 Deployment
-
-### Vercel (Recommended - 5 minutes)
-
-1. **Push to GitHub**
-```bash
-git push origin main
-```
-
-2. **Import to Vercel**
-   - Go to [vercel.com/import](https://vercel.com/import)
-   - Select repository
-   - Add environment variables
-   - Deploy!
-
-3. **Setup Database** (Supabase)
-   - Create project at [supabase.com](https://supabase.com)
-   - Add connection string to `DATABASE_URL`
-
-### Docker (Self-hosted)
-
-```bash
-# Build image
-docker build -t nexus-ultra-builder .
-
-# Run container
-docker run -p 3000:3000 \
-  -e DATABASE_URL=... \
-  -e NEXTAUTH_SECRET=... \
-  nexus-ultra-builder
-```
-
-### Google Cloud Run
-
-```bash
-# Build and push
-gcloud builds submit --tag gcr.io/PROJECT_ID/nexus-ultra-builder
-
-# Deploy
-gcloud run deploy nexus-ultra-builder \
-  --image gcr.io/PROJECT_ID/nexus-ultra-builder \
-  --platform managed \
-  --region us-central1
-```
-
-See [DEPLOYMENT.md](./docs/deployment.md) for detailed instructions.
-
----
-
-## 📖 API Reference
-
-### Authentication
-
-```bash
-POST /api/auth/signin
-POST /api/auth/signup
-POST /api/auth/logout
-GET  /api/auth/session
-```
-
-### Websites
-
-```bash
-GET    /api/websites              # List all websites
-POST   /api/websites              # Create website
-GET    /api/websites/[id]         # Get website
-PUT    /api/websites/[id]         # Update website
-DELETE /api/websites/[id]         # Delete website
-POST   /api/websites/generate     # Generate with AI
-```
-
-### Pages
-
-```bash
-GET    /api/websites/[id]/pages           # List pages
-POST   /api/websites/[id]/pages           # Create page
-GET    /api/websites/[id]/pages/[pageId]  # Get page
-PUT    /api/websites/[id]/pages/[pageId]  # Update page
-```
-
-See [API Documentation](./docs/api.md) for complete reference.
-
----
-
-## 🔒 Security
-
-### Features
-
-- **End-to-End Encryption** - Sensitive data encrypted at rest
-- **HTTPS/TLS** - All traffic encrypted in transit
-- **CSRF Protection** - Cross-site request forgery protection
-- **XSS Prevention** - Input sanitization and output encoding
-- **SQL Injection Prevention** - Parameterized queries with Prisma
-- **Rate Limiting** - Built-in rate limiting on APIs
-- **DDoS Protection** - Cloudflare DDoS protection
-- **Regular Audits** - Security audits and penetration testing
-
-### Best Practices
-
-- Never commit `.env.local` to git
-- Use strong, random `NEXTAUTH_SECRET`
-- Rotate API keys regularly
-- Enable 2FA on admin accounts
-- Review audit logs regularly
-- Keep dependencies updated
-
-See [Security Guide](./docs/security.md) for more details.
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
-
-### Development Workflow
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Make changes and commit (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-### Code Standards
-
-- Use TypeScript for type safety
-- Follow ESLint rules
-- Format with Prettier
-- Write tests for new features
-- Update documentation
-
----
-
-## 📧 Support
-
-- **Documentation**: [docs.nexusultra.com](https://docs.nexusultra.com)
-- **Community**: [Discord](https://discord.gg/nexusultra)
-- **Issues**: [GitHub Issues](https://github.com/nexus-ultra/builder/issues)
-- **Email**: support@nexusultra.com
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- [Vercel](https://vercel.com) - Hosting
-- [Supabase](https://supabase.com) - Database
-- [Stripe](https://stripe.com) - Payments
-- [Anthropic](https://anthropic.com) - AI
-- [OpenAI](https://openai.com) - AI
-
----
-
-<div align="center">
-
-**[⬆ back to top](#nexus-ultra-builder---enterprise-ai-website-builder)**
-
-Made with ❤️ by the [Nexus Ultra](https://nexusultra.com) team
-
-</div>
+**<p align="center">Generated by [ReadmeCodeGen](https://www.readmecodegen.com/)</p>**
