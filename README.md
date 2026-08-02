@@ -1,96 +1,261 @@
-# Nisaraistudio- ✨
+Below is a production-ready README + Master Prompt template for your rananisarsb51214-web/nexus-ultra-builder repository. I couldn't verify that this specific repository is publicly accessible from search results, so this is a custom README you can use directly. 
 
-Nisaraistudio- is a modern, responsive React-based portfolio website showcasing dynamic UI elements and interactive components. It's built with Vite for fast development, styled with Tailwind CSS, and enhanced with captivating animations powered by Framer Motion. While the repository's broader vision encompasses an AI Website Builder and Development Agent (referred to as "Nisar AI Studio"), the current codebase focuses on a highly functional and interactive frontend portfolio, complete with animated project detail modals and a contact form.
+# 🚀 Nexus Ultra Builder
 
-## Table of Contents 📑
+> The Ultimate AI-Powered Website, App, API, Database, Dashboard & Automation Builder.
 
-- [Features ✨](#features-%e2%9c%a8)
-- [Tech Stack 🛠️](#tech-stack-%f0%9f%9a%a7%ef%b8%8f)
-- [Installation ⬇️](#installation-%e2%ac%87%ef%b8%8f)
-- [Usage 💡](#usage-%f0%9f%92%a1)
-- [Project Structure 📂](#project-structure-%f0%9f%93%81)
-- [API Reference 🔗](#api-reference-%f0%9f%94%8c)
-- [Contributing 🤝](#contributing-%f0%9f%a4%9d)
-- [License 📄](#license-%f0%9f%93%84)
-- [Important links 🌐](#important-links-%f0%9f%8c%90)
-- [Footer 🦶](#footer-%f0%9f%9a%b6%f0%9f%8f%bd)
-
-## Features ✨
-
-This portfolio website offers a rich user experience through its core features:
-
-- **Interactive Portfolio Display:** 🖼️ Showcases a curated list of portfolio items, each with a title and a concise description.
-- **Animated Project Modals:** 🌟 Clicking on any portfolio item smoothly opens an animated modal (powered by Framer Motion) that displays detailed information, including a full description, technologies used, and a project link.
-- **Animated Contact Form Modal:** 📧 A dedicated contact button triggers an animated modal containing a form for users to submit their inquiries, ensuring a polished interaction.
-- **Dynamic UI Elements:** 🎨 Leverages `lucide-react` for crisp, modern icons and `motion` from Framer Motion for engaging, fluid animations throughout the interface.
-- **Responsive Design:** 📱 Built with Tailwind CSS, guaranteeing that the application looks and functions beautifully across all devices, from desktops to mobile phones.
-- **Vercel Analytics Integration:** 📈 Includes `@vercel/analytics` for unobtrusive tracking of user engagement and website performance, providing valuable insights.
-
-## Tech Stack 🛠️
-
-The project is built using a modern and robust technology stack:
-
-**Languages:**
-- TypeScript
-- HTML
-- CSS
-
-**Frameworks & Libraries:**
-- **React ⚛️:** The core UI library for building dynamic user interfaces.
-- **Vite ⚡:** A next-generation frontend tooling that provides an extremely fast development experience.
-- **Tailwind CSS 🌬️:** A utility-first CSS framework for rapidly building custom designs.
-- **Framer Motion 🎬:** A powerful animation library for React to create smooth and interactive UI animations.
-- **Lucide React 💡:** A collection of beautiful and customizable open-source icons.
-- **Vercel Analytics 📊:** For gathering performance metrics and visitor insights.
-
-**Development Dependencies & Tools:**
-- `autoprefixer`, `tsx`, `typescript`
-
-**Potential Integrations (for broader vision, not actively used in current frontend):**
-- **@google/genai:** For potential AI content generation, as indicated by `package.json` dependency.
-- **express:** A fast, unopinionated, minimalist web framework for Node.js, suggesting a future backend component.
-
-## Installation ⬇️
-
-To get this project up and running on your local machine, follow these steps:
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/rananisarsb51214/Nisaraistudio-
-    cd Nisaraistudio-
-    ```
-
-2.  **Install dependencies:**
-    Ensure you have Node.js (which includes npm) installed. Then, install the project dependencies:
-    ```bash
-    npm install
-    ```
-
-3.  **Set up environment variables (Optional):**
-    The project is configured to potentially use `dotenv`. If you plan to integrate with Google AI (as suggested by `vite.config.ts`), create a `.env` file in the root directory and add your API key:
-    ```
-    GEMINI_GEMINI_API_KEY=your_gemini_api_key
-    ```
-    *(Note: The current frontend application does not directly use this key, but it's part of the broader project's configuration.)*
-
-## Usage 💡
-
-This project serves as a demonstration of a modern React frontend with advanced UI/UX features. It's an excellent starting point for building interactive portfolios or similar single-page applications.
-
-### Running the Development Server
-
-To start the development server and view the portfolio website:
-
-1.  Ensure you have completed the [Installation](#installation-%e2%ac%87%ef%b8%8f) steps.
-2.  Run the development script:
-    ```bash
-    npm run dev
-    ```
-    The application will typically be accessible at `http://localhost:3000` (as configured in `package.json`).
-
-### Interacting with the Portfolio
-
--   **Explore Portfolio:** Upon loading, you'll see portfolio items. Click on an 
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![Status](https://img.shields.io/badge/status-production-success.svg)
 
 ---
-**<p align="center">Generated by [ReadmeCodeGen](https://www.readmecodegen.com/)</p>**
+
+# 🌍 Overview
+
+Nexus Ultra Builder is an enterprise-grade AI development platform designed to generate production-ready software from natural language.
+
+Build everything from one platform:
+
+- 🌐 Websites
+- 📱 Mobile Apps
+- 💻 Web Apps
+- 🤖 AI Agents
+- ⚙️ APIs
+- 🗄 Databases
+- 📊 Dashboards
+- 🎨 UI Systems
+- 🔐 Aut6t[hentication
+- ☁ Cloud Deployments
+- 🔄 Automation Workflows
+
+---
+
+# ✨ Core Features
+
+## AI Builder
+- Website Generator
+- App Generator
+- Dashboard Builder
+- Landing Page Builder
+
+## Backend Builder
+
+- REST API
+- GraphQL
+- Authentication
+- Admin Panel
+- RBAC
+
+## Database Builder
+
+- PostgreSQL
+- Supabase
+- Firebase
+- MySQL
+- MongoDB
+
+## AI
+
+- OpenAI
+- Claude
+- Gemini
+- Grok
+- DeepSeek
+- Local Models
+
+## Deployment
+
+- Vercel
+- Netlify
+- Railway
+- Docker
+- Cloudflare
+- AWS
+
+---
+
+# 📁 Project Structure
+
+```
+apps/
+packages/
+components/
+templates/
+prompts/
+agents/
+builders/
+sdk/
+cli/
+docs/
+public/
+scripts/
+```
+
+---
+
+# Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Node.js
+- Supabase
+- Firebase
+- PostgreSQL
+- Docker
+- OpenAI
+- Claude
+- Gemini
+
+---
+
+# Installation
+
+```bash
+git clone https://github.com/rananisarsb51214-web/nexus-ultra-builder.git
+
+cd nexus-ultra-builder
+
+npm install
+
+npm run dev
+```
+
+---
+
+# Environment
+
+```
+OPENAI_API_KEY=
+
+ANTHROPIC_API_KEY=
+
+GOOGLE_API_KEY=
+
+SUPABASE_URL=
+
+SUPABASE_KEY=
+
+FIREBASE_PROJECT_ID=
+
+DATABASE_URL=
+```
+
+---
+
+# Roadmap
+
+- AI Website Builder
+- AI App Builder
+- AI Dashboard Builder
+- AI API Builder
+- AI Database Builder
+- AI Agent Builder
+- Plugin Marketplace
+- CLI
+- SDK
+- Team Workspace
+- Enterprise Edition
+
+---
+
+# Contributing
+
+Fork
+
+Create Branch
+
+Commit
+
+Push
+
+Create Pull Request
+
+---
+
+# License
+
+MIT License
+
+---
+
+# MASTER PROMPT
+
+You are Nexus Ultra Builder AI.
+
+Mission:
+
+Generate production-ready software.
+
+Always produce:
+
+• Clean Architecture
+
+• Modular Code
+
+• Secure Code
+
+• Responsive UI
+
+• SEO Optimized
+
+• Accessibility Ready
+
+• Dark/Light Theme
+
+• TypeScript
+
+• Tailwind CSS
+
+• Next.js
+
+• API Routes
+
+• Authentication
+
+• Database Schema
+
+• Admin Dashboard
+
+• Documentation
+
+• README
+
+• Environment Variables
+
+• Docker Support
+
+• CI/CD
+
+• Tests
+
+• Error Handling
+
+• Performance Optimization
+
+• Security Best Practices
+
+When a user gives any idea:
+
+1. Analyze Requirements
+2. Create Folder Structure
+3. Generate Database
+4. Generate API
+5. Generate Frontend
+6. Generate Backend
+7. Generate Components
+8. Generate Authentication
+9. Generate Dashboard
+10. Generate Documentation
+11. Generate Deployment Files
+12. Generate GitHub Actions
+13. Generate Docker Configuration
+14. Generate Production README
+
+Output must always be complete, production-ready, and copy-paste deployable.
+
+Never output placeholders when implementation is possible.
+
+Always prioritize scalability, maintainability, performance, and security.
+````1
