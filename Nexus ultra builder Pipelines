@@ -1,0 +1,1917 @@
+# NEXUS ULTRA PLATFORMS — COMPLETE ARCHITECTURAL REVIEW
+
+**Master Document: Current State Analysis & Platform Roadmap**
+
+**Date:** January 2025  
+**Status:** Strategic Planning Phase  
+**Owner:** Claude AI Architect & CTO  
+**Organization:** Nexus Ultra Platforms  
+**Primary Workspace:** Nexus Ultra Builder
+
+---
+
+## 📋 EXECUTIVE SUMMARY
+
+Nexus Ultra Platforms is evolving from a collection of separate projects into a **unified, modular enterprise AI ecosystem**. This document:
+
+1. ✅ Analyzes the current state of all existing projects
+2. ✅ Maps dependencies and integration points
+3. ✅ Designs the complete platform architecture
+4. ✅ Defines the module ecosystem
+5. ✅ Creates a phased delivery roadmap
+6. ✅ Establishes governance and standards
+
+**Key Decision:** Nexus Ultra Builder is the single source of truth. All future development—including features from Nisar AI Studio and AIOS—integrates into this central platform.
+
+---
+
+## 🏗️ PART I: CURRENT STATE ANALYSIS
+
+### 1.1 Existing Projects Overview
+
+#### A. Nexus Ultra Builder (Primary)
+**Status:** Architecture Phase (Phase 0)  
+**Scope:** Enterprise AI website builder / multi-tenant SaaS platform  
+**Workspace:** Nexus Ultra Platforms (GitHub: rananisarsb51214-web/Nexus-ultra-builder)
+
+**Current Architecture:**
+- **Frontend:** Next.js 14, React 19, TypeScript, Tailwind CSS
+- **Backend:** Next.js API Routes, Node.js
+- **Database:** Firebase/Firestore (primary)
+- **Auth:** Firebase Authentication + RBAC
+- **Payments:** Stripe (subscriptions, invoicing, credits)
+- **AI:** Claude API (primary), OpenAI GPT (fallback), Google Gemini (optional)
+- **Deployment:** Vercel, Docker, multi-cloud support
+- **DevOps:** GitHub Actions, CI/CD ready
+
+**Planned Modules (25+):**
+1. AI Website Builder (drag-drop + AI-assisted)
+2. Website CMS
+3. Theme Builder
+4. Component Library
+5. Template Marketplace
+6. Dashboard & Analytics
+7. Organization Management
+8. Workspace Management
+9. Team Collaboration
+10. Authentication & Authorization
+11. AI Agents Framework
+12. Prompt Management System
+13. Workflow Automation Engine
+14. SEO Manager
+15. Forms & Surveys
+16. Media Library & Storage
+17. Email System
+18. Notifications
+19. Integrations Hub
+20. API Gateway & REST API
+21. GraphQL API (optional)
+22. Deployment Manager
+23. Performance Monitoring
+24. Settings & Configuration
+25. Documentation & Wiki
+26. Knowledge Base
+27. Plugin Marketplace
+28. Billing & Subscriptions
+29. Audit Logging
+30. Search Engine
+
+**Delivery Plan:**
+- **Phase 0:** Architecture & Monorepo (Current)
+- **Phase 1:** Database + Auth + RBAC
+- **Phase 2:** Dashboard + Design System
+- **Phase 3:** Website Builder + CMS
+- **Phase 4:** AI Providers + Automation
+- **Phase 5:** Analytics + Billing + Deployment
+- **Phase 6:** Testing + Docs + Production Ready
+
+---
+
+#### B. Nisar AI Studio (Owner Brand)
+**Status:** MVP + Active Development  
+**Scope:** AI tools & dashboards  
+**Stack:** React + Vite SPA (Vercel deployment)  
+**GitHub Project:** nisaraistudio
+
+**Current Features:**
+- ✅ Cyberpunk dashboard
+- ✅ Google Workspace OAuth integration
+- ✅ Code converter tool (Claude API with streaming)
+- ✅ Website builder page (drag-drop blocks)
+- ⏳ Browser scraping agent (planned)
+
+**Current Problems:**
+- Isolated SPA (not integrated with Nexus Ultra Builder)
+- Duplicate code potential (website builder exists here AND in Nexus Ultra Builder)
+- Not using platform auth (Firebase)
+- Not using platform billing (Stripe)
+- Cannot share components with other projects
+
+**Integration Plan:**
+- Migrate Nisar AI Studio → Nexus Ultra Builder module
+- Reuse all features as dashboard + AI tools section
+- Share auth, database, billing with platform
+- Eliminate code duplication
+
+---
+
+#### C. AIOS (AI Operating System)
+**Status:** Phase 2 (ABI Freeze)  
+**Scope:** AI agent orchestration monorepo  
+**Stack:** TypeScript monorepo with plugin architecture  
+**GitHub:** Part of ecosystem
+
+**Current Components:**
+- ✅ @aios/sdk (API frozen, ready for dependent components)
+- ✅ Firebase Admin integration with audit logging
+- ✅ GitHub auto-upload with comprehensive validation
+- ✅ Vitest test suite with full coverage
+- ⏳ Firestore PersistentEventBus (Phase 2)
+- ⏳ Additional plugins (Phase 3+)
+
+**Integration Plan:**
+- Embed AIOS as @nexus/aios package within Nexus Ultra Builder
+- Use AIOS SDK for AI Agents module in platform
+- Leverage event bus for platform-wide workflows
+- Reuse GitHub auto-upload for deployment automation
+
+---
+
+### 1.2 Technology Stack Audit
+
+#### Consistent Across Projects
+✅ **Frontend:** Next.js 14, React, TypeScript  
+✅ **Styling:** Tailwind CSS, cyberpunk theme  
+✅ **Database:** Firebase/Firestore  
+✅ **Auth:** Firebase Authentication  
+✅ **AI:** Claude API primary + OpenAI fallback  
+✅ **Deployment:** Vercel + Docker  
+✅ **Language:** TypeScript/JavaScript  
+
+#### Inconsistencies to Resolve
+⚠️ **Nisar AI Studio** uses separate React + Vite SPA (should migrate to Next.js)  
+⚠️ **Auth** duplicated between projects (should centralize to Firebase)  
+⚠️ **Database** models need normalization (Firestore schema standardization)  
+⚠️ **Components** not shared between projects  
+⚠️ **APIs** not unified (should use single API gateway)  
+
+---
+
+### 1.3 Current Dependency Map
+
+```
+NEXUS ULTRA PLATFORMS
+│
+├── Nexus Ultra Builder (Primary)
+│   ├── Next.js 14 + React + TypeScript
+│   ├── Firebase/Firestore
+│   ├── Stripe Payments
+│   ├── Claude API
+│   └── 25+ planned modules
+│
+├── Nisar AI Studio (To be integrated)
+│   ├── React + Vite (to migrate to Next.js)
+│   ├── Cyberpunk dashboard
+│   ├── Code converter tool
+│   ├── Website builder (duplicate!)
+│   └── Browser scraping agent
+│
+└── AIOS (To be embedded)
+    ├── @aios/sdk (core)
+    ├── Firebase Admin integration
+    ├── GitHub auto-upload
+    └── EventBus (planned)
+```
+
+---
+
+## 🎯 PART II: PLATFORM ARCHITECTURE DESIGN
+
+### 2.1 Platform Philosophy
+
+**Core Principles:**
+1. **Single Source of Truth** → Nexus Ultra Builder is authoritative
+2. **No Code Duplication** → All features built once, reused everywhere
+3. **Modular Design** → Each feature is an independent module
+4. **Shared Infrastructure** → One database, one auth system, one billing
+5. **Multi-tenant Ready** → Supports organizations, workspaces, teams
+6. **AI-First** → Claude as primary provider, fallback support
+7. **Security by Default** → RBAC, encryption, audit logging built-in
+8. **Scalable** → Designed for millions of users and projects
+
+---
+
+### 2.2 Complete Module Architecture
+
+#### Layer 1: Foundation (Core Modules)
+```
+┌─────────────────────────────────────────────────────┐
+│              NEXUS ULTRA BUILDER                    │
+│                                                     │
+│  ┌─────────────────────────────────────────────┐  │
+│  │         FOUNDATION LAYER                    │  │
+│  │ (Core platform infrastructure)              │  │
+│  ├─────────────────────────────────────────────┤  │
+│  │ 1. Authentication & Authorization           │  │
+│  │    ├─ Firebase Auth integration             │  │
+│  │    ├─ OAuth (Google, GitHub, email)        │  │
+│  │    ├─ JWT token management                 │  │
+│  │    ├─ RBAC (roles, permissions)            │  │
+│  │    └─ MFA & security                       │  │
+│  │                                             │  │
+│  │ 2. Multi-Tenancy & Organization            │  │
+│  │    ├─ Organization management              │  │
+│  │    ├─ Workspace creation & management      │  │
+│  │    ├─ Team & member management             │  │
+│  │    ├─ Invitation & onboarding              │  │
+│  │    └─ Billing per organization             │  │
+│  │                                             │  │
+│  │ 3. Database Layer                          │  │
+│  │    ├─ Firestore data models                │  │
+│  │    ├─ Schema & relationships                │  │
+│  │    ├─ Indexes & optimization               │  │
+│  │    ├─ Real-time sync                       │  │
+│  │    └─ Audit logging                        │  │
+│  │                                             │  │
+│  │ 4. Billing & Subscriptions                 │  │
+│  │    ├─ Stripe integration                   │  │
+│  │    ├─ Subscription management              │  │
+│  │    ├─ Credit system                        │  │
+│  │    ├─ Invoice tracking                     │  │
+│  │    └─ Usage tracking                       │  │
+│  │                                             │  │
+│  │ 5. AI Providers Framework                  │  │
+│  │    ├─ Claude API (primary)                 │  │
+│  │    ├─ OpenAI API (fallback)                │  │
+│  │    ├─ Google Gemini (optional)             │  │
+│  │    ├─ Provider abstraction layer           │  │
+│  │    ├─ Token counting & rate limiting       │  │
+│  │    └─ Error handling & retries             │  │
+│  │                                             │  │
+│  │ 6. API Gateway & REST API                  │  │
+│  │    ├─ Unified API routing                  │  │
+│  │    ├─ Request validation                   │  │
+│  │    ├─ Error handling                       │  │
+│  │    ├─ Rate limiting                        │  │
+│  │    ├─ API documentation                    │  │
+│  │    └─ GraphQL (optional)                   │  │
+│  │                                             │  │
+│  │ 7. Storage & Media                         │  │
+│  │    ├─ Firebase Storage (files, images)     │  │
+│  │    ├─ CDN integration                      │  │
+│  │    ├─ Image optimization                   │  │
+│  │    ├─ Upload management                    │  │
+│  │    └─ Access control                       │  │
+│  │                                             │  │
+│  │ 8. Notifications System                    │  │
+│  │    ├─ Email service                        │  │
+│  │    ├─ Push notifications                   │  │
+│  │    ├─ In-app notifications                 │  │
+│  │    ├─ Webhook delivery                     │  │
+│  │    └─ Notification preferences             │  │
+│  │                                             │  │
+│  │ 9. Analytics & Monitoring                  │  │
+│  │    ├─ Event tracking                       │  │
+│  │    ├─ User analytics                       │  │
+│  │    ├─ Performance monitoring               │  │
+│  │    ├─ Error tracking (Sentry)              │  │
+│  │    ├─ Usage metrics                        │  │
+│  │    └─ Audit logging                        │  │
+│  │                                             │  │
+│  │ 10. Search & Indexing                      │  │
+│  │     ├─ Full-text search                    │  │
+│  │     ├─ Elasticsearch (optional)            │  │
+│  │     ├─ Firestore query optimization       │  │
+│  │     └─ Search analytics                    │  │
+│  │                                             │  │
+│  └─────────────────────────────────────────────┘  │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
+
+#### Layer 2: Feature Modules
+```
+┌─────────────────────────────────────────────────────┐
+│          FEATURE MODULES LAYER                      │
+│ (Built on Foundation, shared across all apps)      │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│ 1. Dashboard & Analytics                           │
+│    ├─ Main dashboard (personalized)                │
+│    ├─ Analytics dashboard                          │
+│    ├─ Admin dashboard                              │
+│    ├─ Performance metrics                          │
+│    └─ Custom dashboards                            │
+│                                                     │
+│ 2. Website Builder Module                          │
+│    ├─ Drag-drop editor                             │
+│    ├─ AI-assisted design                           │
+│    ├─ Responsive preview                           │
+│    ├─ Code export                                  │
+│    └─ Auto-deploy                                  │
+│                                                     │
+│ 3. CMS & Content Management                        │
+│    ├─ Page management                              │
+│    ├─ Blog engine                                  │
+│    ├─ SEO management                               │
+│    ├─ Version control                              │
+│    └─ Content scheduling                           │
+│                                                     │
+│ 4. Theme & Design System                           │
+│    ├─ Pre-built themes                             │
+│    ├─ Custom theme builder                         │
+│    ├─ Design tokens                                │
+│    ├─ Component library                            │
+│    └─ Brand kit management                         │
+│                                                     │
+│ 5. Component Library                               │
+│    ├─ Pre-built components                         │
+│    ├─ Component variations                         │
+│    ├─ Component preview                            │
+│    ├─ Component code export                        │
+│    └─ Component versioning                         │
+│                                                     │
+│ 6. Template Marketplace                            │
+│    ├─ Template browsing                            │
+│    ├─ Template preview                             │
+│    ├─ One-click import                             │
+│    ├─ Template creation tools                      │
+│    ├─ Rating & reviews                             │
+│    └─ Monetization for creators                    │
+│                                                     │
+│ 7. AI Agents Framework                             │
+│    ├─ Agent creation interface                     │
+│    ├─ Agent configuration                          │
+│    ├─ Agent execution & monitoring                 │
+│    ├─ Multi-agent coordination                     │
+│    ├─ Custom tools/plugins                         │
+│    └─ Agent marketplace                            │
+│                                                     │
+│ 8. Prompt Management System                        │
+│    ├─ Prompt library                               │
+│    ├─ Prompt versioning                            │
+│    ├─ Prompt testing & optimization                │
+│    ├─ Prompt templates                             │
+│    ├─ Prompt sharing & collaboration               │
+│    └─ Cost analysis                                │
+│                                                     │
+│ 9. Workflow Automation Engine                      │
+│    ├─ Workflow builder (visual)                    │
+│    ├─ Trigger management                           │
+│    ├─ Action library                               │
+│    ├─ Conditional logic                            │
+│    ├─ Error handling & retries                     │
+│    ├─ Workflow execution logs                      │
+│    └─ Webhook support                              │
+│                                                     │
+│ 10. Forms & Surveys                                │
+│     ├─ Form builder (drag-drop)                    │
+│     ├─ Form types (contact, survey, quiz)          │
+│     ├─ Response collection                         │
+│     ├─ Conditional logic                           │
+│     ├─ Email notifications                         │
+│     └─ Response analytics                          │
+│                                                     │
+│ 11. Media Library                                  │
+│     ├─ Image gallery                               │
+│     ├─ Video hosting                               │
+│     ├─ Document storage                            │
+│     ├─ Folders & organization                      │
+│     ├─ Sharing & collaboration                     │
+│     └─ CDN delivery                                │
+│                                                     │
+│ 12. SEO Manager                                    │
+│     ├─ SEO analysis                                │
+│     ├─ Meta tag management                         │
+│     ├─ Sitemap generation                          │
+│     ├─ Schema markup                               │
+│     ├─ Performance scoring                         │
+│     ├─ Backlink monitoring                         │
+│     └─ Keyword tracking                            │
+│                                                     │
+│ 13. Integrations Hub                               │
+│     ├─ Integration marketplace                     │
+│     ├─ Zapier integration                          │
+│     ├─ Webhooks                                    │
+│     ├─ API keys & access                           │
+│     ├─ Custom integrations                         │
+│     └─ Integration logs                            │
+│                                                     │
+│ 14. Deployment Manager                             │
+│     ├─ Deployment targets (Vercel, Docker, etc)    │
+│     ├─ CI/CD pipeline management                   │
+│     ├─ Environment management                      │
+│     ├─ Deployment history                          │
+│     ├─ Rollback management                         │
+│     └─ Performance monitoring                      │
+│                                                     │
+│ 15. AI Tools & Features                            │
+│     ├─ Code converter (Claude-powered)             │
+│     ├─ Content generator                           │
+│     ├─ Image generator                             │
+│     ├─ SEO optimizer                               │
+│     ├─ Code review assistant                       │
+│     └─ Chat assistant                              │
+│                                                     │
+│ 16. Documentation & Knowledge Base                 │
+│     ├─ Documentation pages                         │
+│     ├─ Knowledge base articles                     │
+│     ├─ Search functionality                        │
+│     ├─ Version control                             │
+│     └─ Comment & feedback                          │
+│                                                     │
+│ 17. Settings & Configuration                       │
+│     ├─ User settings                               │
+│     ├─ Organization settings                       │
+│     ├─ Workspace settings                          │
+│     ├─ API settings                                │
+│     ├─ Security settings                           │
+│     └─ Preferences                                 │
+│                                                     │
+│ 18. Team Collaboration                             │
+│     ├─ Team management                             │
+│     ├─ Permissions & roles                         │
+│     ├─ Team messaging (optional)                   │
+│     ├─ Commenting & feedback                       │
+│     ├─ Activity timeline                           │
+│     └─ Share & collaboration links                 │
+│                                                     │
+│ 19. Plugin Marketplace                             │
+│     ├─ Plugin browsing                             │
+│     ├─ Plugin installation                         │
+│     ├─ Plugin configuration                        │
+│     ├─ Plugin marketplace creator tools            │
+│     └─ Plugin monetization                         │
+│                                                     │
+│ 20. Admin Panel                                    │
+│     ├─ User management                             │
+│     ├─ Organization management                     │
+│     ├─ System health                               │
+│     ├─ Usage & billing overview                    │
+│     ├─ Moderation tools                            │
+│     └─ System configuration                        │
+│                                                     │
+│ 21. AI Chat & Copilot                              │
+│     ├─ In-app chat interface                       │
+│     ├─ Context awareness                           │
+│     ├─ Chat history                                │
+│     ├─ Prompt suggestions                          │
+│     └─ Export conversations                        │
+│                                                     │
+│ 22. Browser Scraping & Data Tools                  │
+│     ├─ Web scraper                                 │
+│     ├─ Data extraction                             │
+│     ├─ API testing tools                           │
+│     └─ Data transformation                         │
+│                                                     │
+│ 23. Version Control & Collaboration                │
+│     ├─ Version history                             │
+│     ├─ Rollback functionality                      │
+│     ├─ Diff viewer                                 │
+│     ├─ Branching (for websites)                    │
+│     └─ Merge conflicts                             │
+│                                                     │
+│ 24. Learning Center                                │
+│     ├─ Tutorial videos                             │
+│     ├─ Interactive guides                          │
+│     ├─ Certifications                              │
+│     ├─ Community forum                             │
+│     └─ Learning paths                              │
+│                                                     │
+│ 25. Plugin & Extension System                      │
+│     ├─ Custom plugins                              │
+│     ├─ Plugin SDK                                  │
+│     ├─ Plugin testing environment                  │
+│     ├─ Plugin deployment                           │
+│     └─ Plugin monetization                         │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
+
+#### Layer 3: Applications & Experiences
+```
+┌─────────────────────────────────────────────────────┐
+│         APPLICATIONS LAYER                          │
+│ (User-facing applications built with modules)      │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│ 1. Nexus Ultra Builder (Web)                       │
+│    ├─ Full SaaS platform                           │
+│    ├─ All features accessible                      │
+│    ├─ Built with Next.js 14                        │
+│    └─ Responsive design                            │
+│                                                     │
+│ 2. Nexus AI Studio (Dashboard & Tools)             │
+│    ├─ Integrated into platform                     │
+│    ├─ Cyberpunk dashboard                          │
+│    ├─ AI tools section                             │
+│    ├─ Code converter                               │
+│    ├─ Content generator                            │
+│    └─ Scraping tools                               │
+│                                                     │
+│ 3. Mobile App (iOS/Android) - Future               │
+│    ├─ React Native or Flutter                      │
+│    ├─ Core features available                      │
+│    ├─ Offline support                              │
+│    └─ Push notifications                           │
+│                                                     │
+│ 4. Browser Extensions - Future                     │
+│    ├─ Website builder extension                    │
+│    ├─ Content capture extension                    │
+│    ├─ AI tools extension                           │
+│    └─ Productivity extension                       │
+│                                                     │
+│ 5. Embedded SDK - Future                           │
+│    ├─ For 3rd party websites                       │
+│    ├─ Website builder widget                       │
+│    ├─ Chat widget                                  │
+│    └─ Forms widget                                 │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
+
+---
+
+### 2.3 Data Model & Database Architecture
+
+#### Firestore Collections Structure
+
+```
+nexus_ultra/
+│
+├── organizations/
+│   ├── {orgId}
+│   │   ├── name
+│   │   ├── slug
+│   │   ├── logo
+│   │   ├── website
+│   │   ├── billing_plan
+│   │   ├── subscription_id
+│   │   ├── settings
+│   │   ├── created_at
+│   │   ├── updated_at
+│   │   │
+│   │   └── members/ (subcollection)
+│   │       ├── {userId}
+│   │       │   ├── role (admin, editor, viewer)
+│   │       │   ├── permissions
+│   │       │   ├── joined_at
+│   │       │   └── status
+│   │
+├── users/
+│   ├── {userId}
+│   │   ├── email
+│   │   ├── name
+│   │   ├── avatar
+│   │   ├── org_id
+│   │   ├── role (global)
+│   │   ├── preferences
+│   │   ├── created_at
+│   │   ├── last_login
+│   │   └── status
+│   │
+├── workspaces/
+│   ├── {workspaceId}
+│   │   ├── org_id
+│   │   ├── name
+│   │   ├── slug
+│   │   ├── description
+│   │   ├── settings
+│   │   ├── created_by
+│   │   ├── created_at
+│   │   │
+│   │   └── members/ (subcollection)
+│   │       ├── {userId}: role, permissions
+│   │
+├── websites/
+│   ├── {websiteId}
+│   │   ├── org_id
+│   │   ├── workspace_id
+│   │   ├── name
+│   │   ├── domain
+│   │   ├── url
+│   │   ├── template_id (if based on template)
+│   │   ├── theme_id
+│   │   ├── settings
+│   │   ├── seo_settings
+│   │   ├── analytics_id
+│   │   ├── created_by
+│   │   ├── created_at
+│   │   ├── updated_at
+│   │   │
+│   │   ├── pages/ (subcollection)
+│   │   │   ├── {pageId}
+│   │   │   │   ├── name
+│   │   │   │   ├── slug
+│   │   │   │   ├── title
+│   │   │   │   ├── description
+│   │   │   │   ├── content (blocks array)
+│   │   │   │   ├── layout_id
+│   │   │   │   ├── seo_data
+│   │   │   │   ├── published
+│   │   │   │   ├── version
+│   │   │   │   └── updated_at
+│   │   │   │
+│   │   │   └── versions/ (subcollection)
+│   │   │       ├── {versionId}
+│   │   │       │   ├── content
+│   │   │       │   ├── created_at
+│   │   │       │   └── created_by
+│   │   │
+│   │   └── sections/ (subcollection)
+│   │       ├── {sectionId}
+│   │       │   ├── name
+│   │       │   ├── content
+│   │       │   └── reusable (boolean)
+│   │
+├── themes/
+│   ├── {themeId}
+│   │   ├── name
+│   │   ├── type (default, custom, premium)
+│   │   ├── colors
+│   │   ├── fonts
+│   │   ├── settings
+│   │   ├── preview_url
+│   │   ├── created_by
+│   │   ├── created_at
+│   │   └── is_public
+│   │
+├── templates/
+│   ├── {templateId}
+│   │   ├── name
+│   │   ├── category
+│   │   ├── description
+│   │   ├── preview_url
+│   │   ├── thumbnail
+│   │   ├── structure (pages, sections)
+│   │   ├── theme
+│   │   ├── price (0 for free)
+│   │   ├── creator_id
+│   │   ├── created_at
+│   │   ├── rating
+│   │   ├── downloads
+│   │   └── is_published
+│   │
+├── components/
+│   ├── {componentId}
+│   │   ├── name
+│   │   ├── category
+│   │   ├── props (schema)
+│   │   ├── code
+│   │   ├── thumbnail
+│   │   ├── tags
+│   │   ├── created_by
+│   │   ├── created_at
+│   │   ├── rating
+│   │   └── is_published
+│   │
+├── ai_agents/
+│   ├── {agentId}
+│   │   ├── org_id
+│   │   ├── workspace_id
+│   │   ├── name
+│   │   ├── description
+│   │   ├── system_prompt
+│   │   ├── tools (array)
+│   │   ├── model (claude, gpt, gemini)
+│   │   ├── temperature
+│   │   ├── max_tokens
+│   │   ├── created_by
+│   │   ├── created_at
+│   │   ├── updated_at
+│   │   │
+│   │   └── executions/ (subcollection)
+│   │       ├── {executionId}
+│   │       │   ├── input
+│   │       │   ├── output
+│   │       │   ├── status
+│   │       │   ├── tokens_used
+│   │       │   ├── cost
+│   │       │   ├── started_at
+│   │       │   └── completed_at
+│   │
+├── prompts/
+│   ├── {promptId}
+│   │   ├── org_id
+│   │   ├── workspace_id
+│   │   ├── name
+│   │   ├── content
+│   │   ├── variables (array)
+│   │   ├── tags
+│   │   ├── created_by
+│   │   ├── created_at
+│   │   ├── version
+│   │   ├── is_public
+│   │   ├── rating
+│   │   └── usage_count
+│   │
+├── workflows/
+│   ├── {workflowId}
+│   │   ├── org_id
+│   │   ├── workspace_id
+│   │   ├── name
+│   │   ├── description
+│   │   ├── trigger_type
+│   │   ├── trigger_config
+│   │   ├── actions (array)
+│   │   ├── created_by
+│   │   ├── created_at
+│   │   ├── updated_at
+│   │   ├── is_active
+│   │   │
+│   │   └── executions/ (subcollection)
+│   │       ├── {executionId}
+│   │       │   ├── input
+│   │       │   ├── output
+│   │       │   ├── status
+│   │       │   ├── started_at
+│   │       │   └── completed_at
+│   │
+├── media/
+│   ├── {mediaId}
+│   │   ├── org_id
+│   │   ├── workspace_id
+│   │   ├── filename
+│   │   ├── type (image, video, document)
+│   │   ├── mime_type
+│   │   ├── size
+│   │   ├── url
+│   │   ├── storage_path
+│   │   ├── created_by
+│   │   ├── created_at
+│   │   ├── tags
+│   │   └── metadata
+│   │
+├── subscriptions/
+│   ├── {subscriptionId}
+│   │   ├── org_id
+│   │   ├── stripe_subscription_id
+│   │   ├── plan_id
+│   │   ├── status (active, canceled, past_due)
+│   │   ├── current_period_start
+│   │   ├── current_period_end
+│   │   ├── cancel_at_period_end
+│   │   ├── created_at
+│   │   └── updated_at
+│   │
+├── invoices/
+│   ├── {invoiceId}
+│   │   ├── org_id
+│   │   ├── stripe_invoice_id
+│   │   ├── subscription_id
+│   │   ├── amount
+│   │   ├── currency
+│   │   ├── status (draft, open, paid, void, uncollectible)
+│   │   ├── due_date
+│   │   ├── pdf_url
+│   │   ├── created_at
+│   │   └── updated_at
+│   │
+├── api_keys/
+│   ├── {keyId}
+│   │   ├── org_id
+│   │   ├── name
+│   │   ├── key_hash
+│   │   ├── permissions (array)
+│   │   ├── created_by
+│   │   ├── created_at
+│   │   ├── last_used_at
+│   │   ├── expires_at
+│   │   └── is_active
+│   │
+├── audit_logs/
+│   ├── {logId}
+│   │   ├── org_id
+│   │   ├── user_id
+│   │   ├── action
+│   │   ├── resource_type
+│   │   ├── resource_id
+│   │   ├── changes (before/after)
+│   │   ├── ip_address
+│   │   ├── user_agent
+│   │   ├── created_at
+│   │   └── status (success, failure)
+│   │
+├── analytics_events/
+│   ├── {eventId}
+│   │   ├── org_id
+│   │   ├── workspace_id (optional)
+│   │   ├── user_id
+│   │   ├── event_name
+│   │   ├── event_data
+│   │   ├── timestamp
+│   │   ├── session_id
+│   │   └── source (web, api, mobile)
+│   │
+└── settings/
+    ├── {settingsId}
+    │   ├── type (global, org, workspace)
+    │   ├── owner_id
+    │   ├── config
+    │   ├── updated_at
+    │   └── updated_by
+```
+
+---
+
+### 2.4 API Architecture
+
+#### Unified REST API Structure
+
+```
+/api/v1/
+├── /auth
+│   ├── POST /login
+│   ├── POST /register
+│   ├── POST /logout
+│   ├── POST /refresh
+│   ├── POST /forgot-password
+│   ├── POST /reset-password
+│   └── GET  /me
+│
+├── /organizations
+│   ├── GET    /              (list)
+│   ├── POST   /              (create)
+│   ├── GET    /{orgId}       (read)
+│   ├── PUT    /{orgId}       (update)
+│   ├── DELETE /{orgId}       (delete)
+│   ├── GET    /{orgId}/members
+│   ├── POST   /{orgId}/members
+│   ├── PUT    /{orgId}/members/{userId}
+│   ├── DELETE /{orgId}/members/{userId}
+│   ├── GET    /{orgId}/billing
+│   ├── POST   /{orgId}/billing/subscribe
+│   └── POST   /{orgId}/billing/cancel
+│
+├── /workspaces
+│   ├── GET    /              (list by org)
+│   ├── POST   /              (create)
+│   ├── GET    /{workspaceId} (read)
+│   ├── PUT    /{workspaceId} (update)
+│   └── DELETE /{workspaceId} (delete)
+│
+├── /websites
+│   ├── GET    /              (list by workspace)
+│   ├── POST   /              (create)
+│   ├── GET    /{websiteId}   (read)
+│   ├── PUT    /{websiteId}   (update)
+│   ├── DELETE /{websiteId}   (delete)
+│   ├── POST   /{websiteId}/publish
+│   ├── POST   /{websiteId}/duplicate
+│   │
+│   ├── /pages
+│   │   ├── GET    /          (list pages)
+│   │   ├── POST   /          (create page)
+│   │   ├── GET    /{pageId}  (read page)
+│   │   ├── PUT    /{pageId}  (update page)
+│   │   ├── DELETE /{pageId}  (delete page)
+│   │   ├── GET    /{pageId}/versions
+│   │   └── POST   /{pageId}/versions/{versionId}/restore
+│   │
+│   └── /sections
+│       ├── GET    /
+│       ├── POST   /
+│       ├── PUT    /{sectionId}
+│       └── DELETE /{sectionId}
+│
+├── /ai/agents
+│   ├── GET    /              (list agents)
+│   ├── POST   /              (create agent)
+│   ├── GET    /{agentId}     (read agent)
+│   ├── PUT    /{agentId}     (update agent)
+│   ├── DELETE /{agentId}     (delete agent)
+│   ├── POST   /{agentId}/execute
+│   └── GET    /{agentId}/executions
+│
+├── /ai/chat
+│   ├── POST   /              (send message)
+│   ├── GET    /history       (get chat history)
+│   └── POST   /clear         (clear history)
+│
+├── /ai/prompts
+│   ├── GET    /              (list prompts)
+│   ├── POST   /              (create prompt)
+│   ├── GET    /{promptId}    (read prompt)
+│   ├── PUT    /{promptId}    (update prompt)
+│   ├── DELETE /{promptId}    (delete prompt)
+│   └── POST   /{promptId}/test
+│
+├── /workflows
+│   ├── GET    /              (list workflows)
+│   ├── POST   /              (create workflow)
+│   ├── GET    /{workflowId}  (read workflow)
+│   ├── PUT    /{workflowId}  (update workflow)
+│   ├── DELETE /{workflowId}  (delete workflow)
+│   ├── POST   /{workflowId}/activate
+│   ├── POST   /{workflowId}/deactivate
+│   └── GET    /{workflowId}/executions
+│
+├── /media
+│   ├── GET    /              (list files)
+│   ├── POST   /              (upload file)
+│   ├── GET    /{mediaId}     (get file)
+│   ├── DELETE /{mediaId}     (delete file)
+│   └── POST   /{mediaId}/share
+│
+├── /integrations
+│   ├── GET    /              (list integrations)
+│   ├── GET    /{integrationId}
+│   ├── POST   /{integrationId}/connect
+│   ├── DELETE /{integrationId}/disconnect
+│   └── GET    /{integrationId}/status
+│
+├── /templates
+│   ├── GET    /              (list templates)
+│   ├── GET    /{templateId}  (get template)
+│   ├── POST   /{templateId}/import
+│   └── POST   /              (create template - creator only)
+│
+├── /components
+│   ├── GET    /              (list components)
+│   ├── GET    /{componentId} (get component)
+│   └── POST   /              (create component - creator only)
+│
+├── /webhooks
+│   ├── GET    /              (list webhooks)
+│   ├── POST   /              (create webhook)
+│   ├── PUT    /{webhookId}   (update webhook)
+│   ├── DELETE /{webhookId}   (delete webhook)
+│   ├── POST   /{webhookId}/test
+│   └── GET    /{webhookId}/logs
+│
+├── /analytics
+│   ├── GET    /events        (list events)
+│   ├── GET    /dashboard     (dashboard data)
+│   ├── GET    /websites/{websiteId}/stats
+│   └── GET    /users/{userId}/stats
+│
+├── /admin
+│   ├── GET    /users         (list all users)
+│   ├── PUT    /users/{userId} (admin edit user)
+│   ├── GET    /organizations (list all orgs)
+│   ├── GET    /system/health
+│   └── GET    /system/stats
+│
+└── /webhooks/external
+    ├── POST   /stripe        (Stripe webhooks)
+    ├── POST   /github        (GitHub webhooks)
+    └── POST   /integrations/:name
+```
+
+---
+
+## 📊 PART III: PHASED DELIVERY ROADMAP
+
+### 3.1 Complete Delivery Timeline
+
+#### Phase 0: Architecture & Monorepo (Current)
+**Duration:** Weeks 1-2  
+**Status:** In Progress  
+
+**Goals:**
+- ✅ Define complete architecture (THIS DOCUMENT)
+- ✅ Establish monorepo structure
+- ✅ Create core folder structure
+- ✅ Setup build system (Vite for packages, Next.js for app)
+- ✅ Document standards & conventions
+- ✅ Create component templates
+- ✅ Setup CI/CD pipeline
+
+**Deliverables:**
+- Architecture documentation
+- Monorepo scaffolding
+- Build configuration
+- CI/CD pipeline
+- Development guidelines
+
+**Ownership:**
+- CTO (Claude) with team leads
+
+---
+
+#### Phase 1: Foundation & Infrastructure (Weeks 3-6)
+**Duration:** 2-3 weeks  
+**Priority:** CRITICAL
+
+**Goals:**
+- Build authentication system (Firebase Auth + JWT)
+- Implement RBAC (roles, permissions)
+- Setup Firestore database with schema
+- Implement multi-tenancy (organizations, workspaces)
+- Create base API Gateway
+- Setup environment & secrets management
+- Implement error handling & logging
+
+**Modules to Complete:**
+1. Authentication & Authorization
+2. Multi-Tenancy & Organization
+3. Database Layer (Firestore setup)
+4. API Gateway & REST API (basic)
+5. Notifications System (basic email)
+6. Audit Logging
+
+**Deliverables:**
+- Auth service with OAuth
+- Organization management
+- Database schema
+- REST API foundations
+- Admin dashboard (basic)
+
+**Ownership:**
+- Backend team lead + Frontend team lead
+
+**Testing:**
+- Unit tests (auth, org, db)
+- Integration tests (auth flow)
+- API tests (endpoints)
+
+---
+
+#### Phase 2: Dashboard & Design System (Weeks 7-10)
+**Duration:** 2 weeks  
+**Priority:** HIGH
+
+**Goals:**
+- Create responsive dashboard shell
+- Build design system (Tailwind + components)
+- Implement cyberpunk theme
+- Create component library
+- Build admin dashboard
+- Implement basic analytics
+
+**Modules to Complete:**
+1. Dashboard & Analytics (structure)
+2. Theme & Design System
+3. Component Library (core components)
+4. Settings & Configuration
+5. Team Collaboration (basic)
+
+**Deliverables:**
+- Main dashboard UI
+- Design system documentation
+- Component library (50+ components)
+- Admin dashboard
+- User settings page
+
+**Ownership:**
+- Frontend team lead + Design lead
+
+**Testing:**
+- Component tests
+- Visual regression tests
+- Accessibility tests
+
+---
+
+#### Phase 3: Website Builder & CMS (Weeks 11-16)
+**Duration:** 3 weeks  
+**Priority:** HIGH
+
+**Goals:**
+- Build drag-drop editor
+- Implement page/section management
+- Create CMS functionality
+- Build responsive preview
+- Implement version control
+- Build theme selector
+
+**Modules to Complete:**
+1. Website Builder Module
+2. CMS & Content Management
+3. Template Marketplace (basic)
+4. Media Library (basic)
+5. SEO Manager (basic)
+
+**Deliverables:**
+- Drag-drop editor
+- CMS pages
+- Template system
+- Media upload
+- Basic SEO tools
+- Version history UI
+
+**Ownership:**
+- Frontend team + Backend team
+
+**Testing:**
+- Component tests (editor)
+- Drag-drop tests
+- Save/load tests
+- SEO validation tests
+
+---
+
+#### Phase 4: AI Integration & Automation (Weeks 17-22)
+**Duration:** 3 weeks  
+**Priority:** CRITICAL
+
+**Goals:**
+- Integrate Claude API
+- Build prompt management
+- Create workflow automation engine
+- Implement AI agents framework
+- Build AI chat interface
+- Implement code converter tool
+
+**Modules to Complete:**
+1. AI Providers Framework
+2. AI Agents Framework
+3. Prompt Management System
+4. Workflow Automation Engine
+5. Forms & Surveys
+6. AI Chat & Copilot
+7. Browser Scraping Tools
+8. AI Tools & Features
+
+**Deliverables:**
+- Claude API integration
+- Prompt library
+- Workflow builder
+- Agent creation UI
+- Chat interface
+- Code converter
+- Scraping tools
+
+**Ownership:**
+- AI/Backend team + Frontend team
+
+**Testing:**
+- API integration tests
+- Workflow execution tests
+- Agent execution tests
+- Tool tests (scraper, converter)
+
+---
+
+#### Phase 5: Billing, Analytics & Deployment (Weeks 23-28)
+**Duration:** 3 weeks  
+**Priority:** HIGH
+
+**Goals:**
+- Integrate Stripe for billing
+- Implement subscription management
+- Complete analytics system
+- Build deployment manager
+- Implement usage tracking
+- Build reporting dashboards
+
+**Modules to Complete:**
+1. Billing & Subscriptions (complete)
+2. Analytics & Monitoring (complete)
+3. Deployment Manager
+4. Integrations Hub (basic)
+5. Admin Panel (advanced)
+6. Search & Indexing
+
+**Deliverables:**
+- Stripe integration
+- Billing dashboard
+- Analytics dashboards
+- Deployment workflows
+- Integration marketplace (basic)
+- Usage reports
+
+**Ownership:**
+- Backend team + Finance lead
+
+**Testing:**
+- Billing tests
+- Payment flow tests
+- Analytics tests
+- Deployment tests
+
+---
+
+#### Phase 6: Polish, Documentation & Launch (Weeks 29-32)
+**Duration:** 2-3 weeks  
+**Priority:** CRITICAL
+
+**Goals:**
+- Write comprehensive documentation
+- Perform security audit
+- Load testing & optimization
+- Mobile responsiveness
+- Accessibility compliance
+- Create user guides
+- Launch production
+
+**Modules to Complete:**
+1. Documentation & Knowledge Base (complete)
+2. Learning Center (complete)
+3. Plugin & Extension System
+4. Integrations Hub (complete)
+
+**Deliverables:**
+- API documentation
+- User guides & tutorials
+- Developer documentation
+- Security report
+- Performance optimization report
+- Accessibility audit report
+- Launch checklist
+
+**Ownership:**
+- Tech lead + Entire team
+
+**Testing:**
+- Security audit (external)
+- Load testing (1000+ concurrent)
+- Accessibility audit
+- User acceptance testing
+- Production readiness
+
+---
+
+### 3.2 Feature Release Timeline
+
+```
+Week 1-2   Phase 0: Architecture
+├─ Architecture docs ✓
+├─ Monorepo setup ✓
+└─ CI/CD pipeline ✓
+
+Week 3-6   Phase 1: Foundation
+├─ Auth system ✓
+├─ Organization management ✓
+├─ Database setup ✓
+├─ API Gateway ✓
+└─ Logging/monitoring ✓
+
+Week 7-10  Phase 2: Dashboard & Design
+├─ Dashboard UI ✓
+├─ Design system ✓
+├─ Component library ✓
+└─ Admin dashboard ✓
+
+Week 11-16 Phase 3: Website Builder
+├─ Drag-drop editor ✓
+├─ CMS ✓
+├─ Templates ✓
+├─ Media library ✓
+└─ SEO tools ✓
+
+Week 17-22 Phase 4: AI & Automation
+├─ Claude integration ✓
+├─ Prompt management ✓
+├─ Workflows ✓
+├─ AI agents ✓
+├─ Chat interface ✓
+└─ AI tools ✓
+
+Week 23-28 Phase 5: Billing & Analytics
+├─ Stripe integration ✓
+├─ Billing dashboard ✓
+├─ Analytics ✓
+├─ Deployment manager ✓
+└─ Integrations ✓
+
+Week 29-32 Phase 6: Launch
+├─ Documentation ✓
+├─ Security audit ✓
+├─ Performance optimization ✓
+└─ Launch 🚀 ✓
+```
+
+---
+
+## 🔄 PART IV: INTEGRATION STRATEGY
+
+### 4.1 Nisar AI Studio Integration
+
+**Current State:**
+- Isolated React + Vite SPA
+- Separate database (if any)
+- Separate authentication
+- Duplicate website builder feature
+
+**Integration Plan:**
+
+**Step 1: Migrate Auth**
+```
+Current: Nisar AI Studio uses its own auth
+Future: Use Nexus Ultra Firebase Auth
+Action: Swap auth provider, update API calls
+```
+
+**Step 2: Migrate Data**
+```
+Current: Nisar data in separate location
+Future: Move to Nexus Ultra Firestore
+Action: Data migration script + validation
+```
+
+**Step 3: Integrate Features**
+```
+Current: Nisar AI Studio has:
+  - Cyberpunk dashboard
+  - Code converter tool
+  - Website builder (duplicate!)
+  - Browser scraping
+
+Future: All features available in Nexus platform as modules
+Action:
+  - Cyberpunk dashboard → Main dashboard theme
+  - Code converter → AI tools section
+  - Website builder → Use Nexus builder (remove duplicate)
+  - Scraper → AI tools → Browser scraping agent
+```
+
+**Step 4: Merge UI/UX**
+```
+Keep: Cyberpunk aesthetic (already brand standard)
+Keep: Nisar-specific layouts
+Add: Navigation to Nexus platform features
+Result: Seamless experience within platform
+```
+
+**Timeline:** Integrate into Phase 3 (Weeks 11-16)
+
+---
+
+### 4.2 AIOS Integration
+
+**Current State:**
+- Monorepo with SDK (API frozen)
+- GitHub auto-upload for generated code
+- Firestore event bus (planned)
+- Firebase admin integration
+
+**Integration Plan:**
+
+**Step 1: Embed @aios/sdk**
+```
+Current: @aios/sdk standalone monorepo
+Future: @nexus/aios package in Nexus monorepo
+Action: Import AIOS code, update package names, maintain compatibility
+```
+
+**Step 2: Integrate GitHub Upload**
+```
+Current: AIOS handles uploads independently
+Future: Use for deployment manager in Nexus
+Action: Create Deployment Manager module using GitHub upload
+Result: Generated code automatically uploaded to GitHub
+```
+
+**Step 3: Use Event Bus**
+```
+Current: Firestore PersistentEventBus (Phase 2 AIOS)
+Future: Platform-wide event distribution
+Action: Build on AIOS event bus for workflows, webhooks
+Result: Entire platform event-driven
+```
+
+**Step 4: AI Agent Framework**
+```
+Current: AIOS is agent orchestration platform
+Future: Provide AI Agents Framework module in Nexus
+Action: Expose AIOS agent capabilities via Nexus UI
+Result: Users can create/manage agents through platform
+```
+
+**Timeline:** Integrate into Phase 4 (Weeks 17-22)
+
+---
+
+### 4.3 Component Reusability Strategy
+
+**Goal:** Build once, use everywhere
+
+**Implementation:**
+
+**1. Component Library Package (@nexus/components)**
+```
+nexus-monorepo/
+├── packages/
+│   ├── @nexus/components/
+│   │   ├── buttons/
+│   │   ├── forms/
+│   │   ├── cards/
+│   │   ├── modals/
+│   │   ├── navigation/
+│   │   ├── layouts/
+│   │   ├── theme/
+│   │   └── index.ts (exports all)
+│   │
+│   ├── @nexus/icons/
+│   ├── @nexus/hooks/
+│   ├── @nexus/utils/
+│   ├── @nexus/types/
+│   └── @nexus/constants/
+```
+
+**2. Shared Utilities Package (@nexus/utils)**
+```
+- API client
+- Authentication helpers
+- Data transformation
+- Validation helpers
+- Error handling
+- Storage utilities
+- Date utilities
+- etc.
+```
+
+**3. Shared Types Package (@nexus/types)**
+```
+- TypeScript interfaces
+- Database models
+- API schemas
+- Component props types
+```
+
+**4. Shared Hooks Package (@nexus/hooks)**
+```
+- useAuth
+- useOrganization
+- useWorkspace
+- useApi
+- useLocalStorage
+- useAsync
+- useDebounce
+- etc.
+```
+
+**Usage Across Projects:**
+```
+// In apps/nexus-builder/
+import { Button, Modal } from '@nexus/components';
+import { useAuth } from '@nexus/hooks';
+import { User } from '@nexus/types';
+
+// In future: mobile app
+import { Button, Modal } from '@nexus/components';
+import { useAuth } from '@nexus/hooks';
+// Same components, different app!
+```
+
+---
+
+## 🏛️ PART V: GOVERNANCE & STANDARDS
+
+### 5.1 Repository Structure
+
+```
+nexus-ultra-platforms/
+│
+├── apps/                           # User-facing applications
+│   ├── nexus-builder/              # Main SaaS platform (Next.js)
+│   │   ├── app/
+│   │   ├── components/
+│   │   ├── pages/                  # (App router)
+│   │   ├── public/
+│   │   └── next.config.js
+│   │
+│   ├── admin-dashboard/            # Admin-only interface
+│   ├── docs-website/               # Public documentation site
+│   ├── mobile/                     # React Native (future)
+│   └── browser-extension/          # Chrome extension (future)
+│
+├── packages/                       # Shared libraries
+│   ├── @nexus/components/          # React components
+│   ├── @nexus/ui/                  # UI utilities
+│   ├── @nexus/hooks/               # Custom React hooks
+│   ├── @nexus/utils/               # Utility functions
+│   ├── @nexus/types/               # TypeScript types
+│   ├── @nexus/constants/           # Constants
+│   ├── @nexus/api-client/          # API client SDK
+│   ├── @nexus/aios/                # AI agent SDK (from AIOS)
+│   ├── @nexus/database/            # Database models
+│   ├── @nexus/auth/                # Auth utilities
+│   ├── @nexus/analytics/           # Analytics package
+│   ├── @nexus/validator/           # Validation schemas
+│   └── @nexus/cli/                 # CLI tools (future)
+│
+├── services/                       # Backend microservices (future)
+│   ├── auth-service/               # Authentication service
+│   ├── api-gateway/                # API aggregation
+│   ├── email-service/              # Email delivery
+│   ├── webhook-service/            # Webhook delivery
+│   ├── analytics-service/          # Event processing
+│   └── ai-service/                 # AI orchestration
+│
+├── agents/                         # Pre-built AI agents
+│   ├── content-generator/
+│   ├── code-optimizer/
+│   ├── seo-analyzer/
+│   ├── website-scanner/
+│   └── data-extractor/
+│
+├── prompts/                        # Shared prompts
+│   ├── content-generation/
+│   ├── code-review/
+│   ├── seo-analysis/
+│   └── data-extraction/
+│
+├── templates/                      # Template definitions
+│   ├── website-templates/
+│   ├── email-templates/
+│   └── form-templates/
+│
+├── infrastructure/                 # DevOps & infrastructure
+│   ├── docker/
+│   │   ├── Dockerfile.prod
+│   │   ├── docker-compose.yml
+│   │   └── .dockerignore
+│   │
+│   ├── kubernetes/                 # K8s configs (future)
+│   │
+│   ├── terraform/                  # Infrastructure as code (future)
+│   │
+│   └── ci-cd/
+│       ├── github-workflows/
+│       ├── bitbucket-pipelines.yml
+│       └── deployment-scripts/
+│
+├── docs/                           # Documentation
+│   ├── architecture/               # Architecture docs
+│   ├── api/                        # API documentation
+│   ├── developer-guide/            # Developer onboarding
+│   ├── deployment-guide/           # Deployment instructions
+│   ├── user-guide/                 # User documentation
+│   └── roadmap/                    # Project roadmap
+│
+├── tests/                          # Shared test utilities
+│   ├── fixtures/
+│   ├── mocks/
+│   └── helpers/
+│
+├── scripts/                        # Utility scripts
+│   ├── setup.sh
+│   ├── build.sh
+│   ├── deploy.sh
+│   └── migrate-data.sh
+│
+├── .github/                        # GitHub config
+│   ├── workflows/
+│   ├── ISSUE_TEMPLATE/
+│   └── PULL_REQUEST_TEMPLATE/
+│
+├── package.json                    # Monorepo root
+├── pnpm-workspace.yaml             # pnpm workspaces
+├── tsconfig.json                   # Shared TS config
+├── eslint.config.js                # Shared ESLint config
+├── prettier.config.js              # Shared Prettier config
+├── .env.example                    # Environment template
+├── README.md                       # Project overview
+├── CONTRIBUTING.md                 # Contribution guidelines
+├── CODE_OF_CONDUCT.md              # Community guidelines
+├── ARCHITECTURE.md                 # Architecture (this doc)
+├── ROADMAP.md                      # Product roadmap
+├── CHANGELOG.md                    # Version history
+└── LICENSE                         # MIT License
+```
+
+---
+
+### 5.2 Naming Conventions
+
+**Packages:**
+```
+@nexus/{package-name}  (all lowercase, hyphens)
+```
+
+**Collections (Firestore):**
+```
+organizations, workspaces, websites, pages, users
+workflows, ai_agents, prompts, templates, components
+(lowercase, underscores for multi-word)
+```
+
+**API Endpoints:**
+```
+/api/v1/{resource}/{subresource}/{action}
+GET    /api/v1/organizations
+POST   /api/v1/organizations
+GET    /api/v1/organizations/{orgId}
+GET    /api/v1/organizations/{orgId}/websites
+(lowercase, hyphens, plural nouns)
+```
+
+**Components:**
+```
+export default function MyComponentName() { }
+// file: MyComponentName.tsx
+// usage: <MyComponentName prop1="value" />
+```
+
+**Hooks:**
+```
+export function useMyHook() { }
+// file: useMyHook.ts
+// usage: const value = useMyHook()
+```
+
+**Types:**
+```
+export type MyType = { };
+export interface MyInterface { }
+// file: my-type.ts or my-interface.ts
+```
+
+**Constants:**
+```
+export const MY_CONSTANT = 'value';
+// file: constants.ts
+```
+
+---
+
+### 5.3 Development Standards
+
+**TypeScript:**
+- ✅ Strict mode enabled
+- ✅ No `any` types (use `unknown` if needed)
+- ✅ Full type safety
+- ✅ Exhaustiveness checks
+
+**React:**
+- ✅ Functional components only
+- ✅ Hooks for state management
+- ✅ Context for global state
+- ✅ Props interfaces typed
+- ✅ Server components where possible (Next.js 14+)
+
+**Code Quality:**
+- ✅ ESLint configured
+- ✅ Prettier for formatting
+- ✅ Pre-commit hooks (husky)
+- ✅ 80%+ test coverage
+- ✅ No console.log in production
+
+**Git:**
+- ✅ Conventional commits (`feat:`, `fix:`, `docs:`, etc.)
+- ✅ Branch naming: `feature/`, `bugfix/`, `docs/`
+- ✅ PR templates
+- ✅ Require reviews before merge
+- ✅ Squash commits to main
+
+**Database:**
+- ✅ Firestore indexing for queries
+- ✅ Data validation on write
+- ✅ Audit logging for all changes
+- ✅ No direct data manipulation
+- ✅ Migrations for schema changes
+
+**API:**
+- ✅ RESTful design principles
+- ✅ Request/response validation
+- ✅ Error handling with codes
+- ✅ API versioning
+- ✅ Rate limiting
+- ✅ Authentication on all endpoints
+
+**Security:**
+- ✅ No secrets in code
+- ✅ Environment variables for config
+- ✅ Input validation & sanitization
+- ✅ HTTPS only
+- ✅ CORS configured
+- ✅ CSRF protection
+- ✅ Security headers
+
+**Testing:**
+- ✅ Unit tests with Vitest
+- ✅ Integration tests
+- ✅ E2E tests with Playwright (future)
+- ✅ Component tests with Testing Library
+- ✅ Mock external APIs
+- ✅ Test database (Firestore Emulator)
+
+**Documentation:**
+- ✅ Code comments for complex logic
+- ✅ JSDoc for public APIs
+- ✅ README in each package
+- ✅ Architecture decisions documented
+- ✅ API documentation generated
+- ✅ User guides for features
+
+---
+
+### 5.4 Code Review Process
+
+**Pull Request Flow:**
+
+```
+1. Developer creates branch
+   git checkout -b feature/my-feature
+
+2. Implement feature with tests
+   - Write code
+   - Write tests
+   - Run tests locally
+   - ESLint & Prettier pass
+
+3. Push and create PR
+   - Clear title: "feat: add amazing feature"
+   - Description: what, why, how
+   - Checklist: tests, docs, etc.
+
+4. Automated checks run
+   - GitHub Actions
+   - ESLint
+   - Tests
+   - Coverage
+   - Type checking
+
+5. Code review
+   - Minimum 2 reviewers
+   - Review for:
+     * Code quality
+     * Security
+     * Testing
+     * Performance
+     * Architecture
+   - Request changes if needed
+   - Approve when ready
+
+6. Merge to main
+   - Squash commits
+   - Delete branch
+   - Close related issues
+
+7. Deploy to production
+   - GitHub Actions triggers
+   - Automated deployment
+   - Smoke tests run
+   - Monitor for errors
+```
+
+---
+
+## 🚀 PART VI: DEPLOYMENT STRATEGY
+
+### 6.1 Deployment Targets
+
+**Production:**
+- ✅ Vercel (Next.js app)
+- ✅ Docker (containerized service)
+- ✅ Firebase (database, auth, storage)
+- ✅ Stripe (payments)
+- ✅ Cloudflare (CDN, security)
+
+**Staging:**
+- ✅ Vercel preview deployment
+- ✅ Firebase staging project
+- ✅ Test Stripe keys
+
+**Development:**
+- ✅ Local Next.js dev server
+- ✅ Firebase Emulator
+- ✅ Local testing
+
+### 6.2 CI/CD Pipeline
+
+**GitHub Actions Workflow:**
+
+```yaml
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - Checkout code
+      - Setup Node
+      - Install dependencies
+      - Run linter
+      - Run type check
+      - Run tests
+      - Upload coverage
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - Checkout code
+      - Build Next.js
+      - Build packages
+      - Cache artifacts
+
+  deploy-preview:
+    needs: build
+    if: pull_request
+    runs-on: ubuntu-latest
+    steps:
+      - Deploy to Vercel preview
+      - Add preview URL to PR
+
+  deploy-staging:
+    needs: build
+    if: push to staging
+    runs-on: ubuntu-latest
+    steps:
+      - Deploy to Vercel staging
+      - Run smoke tests
+      - Notify team
+
+  deploy-production:
+    needs: build
+    if: push to main + approval
+    runs-on: ubuntu-latest
+    steps:
+      - Deploy to Vercel production
+      - Run smoke tests
+      - Database migrations
+      - Cache clear
+      - Monitor errors
+      - Notify team
+```
+
+---
+
+## 📈 PART VII: SUCCESS METRICS
+
+### 7.1 Platform KPIs
+
+**User Growth:**
+- 100 users by Week 8
+- 500 users by Week 16
+- 2,000 users by Week 24
+- 10,000 users by end of year
+
+**Feature Adoption:**
+- Dashboard: 95% daily active users
+- Website builder: 70% of users create website
+- AI tools: 60% of users use at least once
+- Workflows: 40% of organizations create workflow
+
+**System Performance:**
+- Page load: < 2 seconds (95th percentile)
+- API response: < 500ms (95th percentile)
+- Uptime: 99.9%
+- Error rate: < 0.1%
+
+**Quality Metrics:**
+- Test coverage: >= 80%
+- TypeScript strict: 100%
+- ESLint pass: 100%
+- Security score: A+
+
+**Business Metrics:**
+- Subscription conversion: 10%+
+- Monthly recurring revenue (MRR): $10,000+ by month 12
+- Customer satisfaction (NPS): 50+
+- Churn rate: < 5% monthly
+
+---
+
+## 📋 IMMEDIATE ACTION ITEMS
+
+### Week 1 (Starting Now)
+
+**1. Finalize Architecture**
+- [ ] Review this document with team
+- [ ] Get feedback and iterate
+- [ ] Create architecture diagrams
+- [ ] Document assumptions
+
+**2. Setup Monorepo**
+- [ ] Create GitHub repository
+- [ ] Initialize pnpm workspaces
+- [ ] Create package structure
+- [ ] Setup build system
+
+**3. Create Core Documentation**
+- [ ] Development guidelines
+- [ ] Git workflow
+- [ ] PR template
+- [ ] Code of conduct
+
+**4. Setup Development Environment**
+- [ ] Node.js setup (v18+)
+- [ ] pnpm installation
+- [ ] IDE configuration (VS Code)
+- [ ] Pre-commit hooks (husky)
+
+**5. Plan Phase 1**
+- [ ] Break down tasks
+- [ ] Assign team members
+- [ ] Create sprint plan
+- [ ] Set milestones
+
+---
+
+## 🎯 CONCLUSION
+
+**Nexus Ultra Platforms** is designed as a **unified, modular, enterprise-grade AI ecosystem** where:
+
+1. ✅ **Nexus Ultra Builder** is the single source of truth
+2. ✅ **No code duplication** - build once, use everywhere
+3. ✅ **Modular architecture** - 25+ independent modules
+4. ✅ **Shared infrastructure** - unified auth, database, billing, AI
+5. ✅ **Phased delivery** - 8 weeks to MVP, 8 weeks to full product
+6. ✅ **AI-first platform** - Claude API at core
+7. ✅ **Production-ready** - security, scalability, monitoring built-in
+8. ✅ **Future-proof** - extensible, maintainable, well-documented
+
+This is **not** a collection of separate projects. This is **one coherent platform** with multiple surfaces (web, dashboard, tools, etc.) all powered by the same infrastructure.
+
+---
+
+**Status:** ✅ Approved for Implementation  
+**Owner:** Claude AI Architect & CTO  
+**Next Phase:** Begin Phase 0 immediately  
+**Review Date:** Every 2 weeks during execution
+
+**Let's build something incredible together! 🚀**
